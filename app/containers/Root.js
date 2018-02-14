@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import {Intent,Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Button} from "@blueprintjs/core";
+import {Intent,Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Button, Card} from "@blueprintjs/core";
 import Home from "../components/Home";
 
 import { Flex, Box } from 'reflexbox'
@@ -42,7 +42,13 @@ export default class Root extends Component<Props> {
               <Box p={1}><Home/></Box>
             </Flex>
           </Box>
-          <Box>Footer</Box>
+          <Box>
+            <Card interactive={true} elevation={Card.ELEVATION_THREE}>
+              <h5><a href="#">Card heading</a></h5>
+              <p>Card content</p>
+              <Button>Submit</Button>
+            </Card>
+          </Box>
         </Flex>
       </Provider>
     );
