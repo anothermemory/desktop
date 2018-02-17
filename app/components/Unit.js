@@ -11,6 +11,7 @@ type Props = {
   created: Date,
   updated: Date,
   onTitleChanged: (title : string) => void,
+  body: React$Node,
 };
 type State = {};
 
@@ -26,19 +27,15 @@ export default class Unit extends React.Component<Props, State> {
       <Card fluid>
         <Card.Content>
           <Card.Header>
-            <EditableText defaultValue={this.props.title} onConfirm={this.props.onTitleChanged} />
+            <EditableText defaultValue={this.props.title} onConfirm={this.props.onTitleChanged} placeholder="Click to Edit Title" />
             <Button icon="delete" size="mini" floated="right" negative compact/>
           </Card.Header>
           <Card.Meta>Updated {moment(this.props.updated).format("D, YYYY [at] HH:mm")}</Card.Meta>
         </Card.Content>
         <Card.Content>
-          {this.renderBody()}
+          {this.props.body}
         </Card.Content>
       </Card>
     );
-  }
-
-  renderBody(): React$Node {
-
   }
 }
