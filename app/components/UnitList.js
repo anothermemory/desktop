@@ -24,13 +24,18 @@ export default class UnitList extends React.Component<Props, State> {
       created: new Date(),
       updated: new Date(),
       onTitleChanged: (title : string) => {},
+      onEditClicked: () => {},
+      onSaveClicked: () => {},
+      onDeleteClicked: () => {},
+      isEditing: false,
+      data: 'Some data'
     };
 
     return (
       <div>
         <List>
           <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
+          <List.Item><List.Content><UnitTextPlain {...defaultProps} isEditing={true}/></List.Content></List.Item>
           <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
           <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
           <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
