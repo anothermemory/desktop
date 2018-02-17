@@ -47,7 +47,7 @@ export default class Unit extends React.Component<Props, State> {
 
   render() {
     return (
-      <Card fluid>
+      <Card fluid color={this.props.isEditing ? 'blue' : 'white'}>
         <Card.Content>
           <Card.Header>
             <Grid columns='equal'>
