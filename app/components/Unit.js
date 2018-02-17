@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import {Card, Dropdown, Grid} from 'semantic-ui-react'
+import {Card, Confirm, Dropdown, Grid} from 'semantic-ui-react'
 import {EditableText} from '@blueprintjs/core'
 
 const moment = require('moment');
@@ -19,12 +19,31 @@ type Props = {
   isEditing: boolean,
 };
 
-export default class Unit extends React.Component<Props> {
+type State = {
+  isDeleteConfirmOpened: boolean
+};
+
+export default class Unit extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
     this.props = props;
+    this.state = {isDeleteConfirmOpened: false};
   }
+
+  handleDeleteConfirm = () => {
+    this.hideDeleteConfirm();
+    this.props.onDeleteClicked();
+  };
+
+  showDeleteConfirm = () => {
+    this.setState({isDeleteConfirmOpened: true});
+  };
+
+  hideDeleteConfirm = () => {
+    this.setState({isDeleteConfirmOpened: false});
+  };
+
 
   render() {
     return (
@@ -41,7 +60,7 @@ export default class Unit extends React.Component<Props> {
                     <Dropdown.Menu className='left'>
                       {!this.props.isEditing && <Dropdown.Item icon="edit" text='Edit' onClick={()=>this.props.onEditClicked()}/>}
                       {this.props.isEditing && <Dropdown.Item icon="save" text='Save' onClick={()=>this.props.onSaveClicked()}/>}
-                      <Dropdown.Item icon='delete' text='Delete' onClick={()=>this.props.onDeleteClicked()}/>
+                      <Dropdown.Item icon='delete' text='Delete' onClick={this.showDeleteConfirm}/>
                     </Dropdown.Menu>
                   </Dropdown>
                 </Grid.Column>
@@ -52,6 +71,10 @@ export default class Unit extends React.Component<Props> {
         </Card.Content>
         {this.props.isEditing && <Card.Content>{this.props.editBody}</Card.Content>}
         {!this.props.isEditing && <Card.Content>{this.props.viewBody}</Card.Content>}
+        <Confirm open={this.state.isDeleteConfirmOpened}
+                 content='Are you sure wants to delete this unit?'
+                 onConfirm={this.handleDeleteConfirm}
+                 onCancel={this.hideDeleteConfirm}/>
       </Card>
     );
   }
