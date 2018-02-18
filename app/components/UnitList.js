@@ -3,6 +3,7 @@ import React from 'react';
 import {Button, Card, Container, Form, Grid, Header, Icon, Item, Label, List, TextArea} from 'semantic-ui-react'
 import UnitTextPlain from "./UnitTextPlain";
 
+var faker = require('faker');
 
 type Props = {
 };
@@ -31,15 +32,19 @@ export default class UnitList extends React.Component<Props, State> {
       data: 'Some data'
     };
 
+    const itemCount = 10;
+
     return (
       <div>
         <List>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps} isEditing={true}/></List.Content></List.Item>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
-          <List.Item><List.Content><UnitTextPlain {...defaultProps}/></List.Content></List.Item>
+          {[...Array(itemCount)].map((e, i)=> <List.Item><List.Content>
+            <UnitTextPlain {...defaultProps}
+                           title={faker.random.words()}
+                           updated={faker.date.past()}
+                           isEditing={faker.random.boolean()}
+                           data={faker.lorem.paragraphs(10)}
+            />
+          </List.Content></List.Item>)}
         </List>
       </div>
     );
